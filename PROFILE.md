@@ -4,7 +4,7 @@ Proporcione una forma para que el administrador segmente los usos en perfiles de
 
 ## Perfiles
 
-La clase Perfil (correspondiente a la `glpi_profilestabla`) almacena cada conjunto de derechos.
+La [clase Perfil](https://forge.glpi-project.org/apidoc/class-Profile.html) (correspondiente a la `glpi_profilestabla`) almacena cada conjunto de derechos.
 Un perfil tiene un conjunto de campos base independientes de los subderechos y, por lo tanto, podría:
 
 - se definirá como predeterminado para nuevos usuarios ( `is_default` campo).
@@ -15,7 +15,7 @@ Un perfil tiene un conjunto de campos base independientes de los subderechos y, 
 
 ## Definición de derechos
 
-Están definidos por la clase ProfileRight (correspondiente a la `glpi_profilerights` tabla)
+Están definidos por la [clase ProfileRight](https://forge.glpi-project.org/apidoc/class-ProfileRight.html) (correspondiente a la `glpi_profilerights` tabla)
 
 Cada uno consta de:
 - una clave foránea de perfil ( `profiles_id` campo)
@@ -77,11 +77,11 @@ Los nuevos derechos deben ser verificados por sus propias funciones, consulte de
 
 Cada clase de tipo de elemento que hereda de CommonDBTM se beneficiará de las comprobaciones correctas estándar. Consulte los siguientes métodos:
 
-- puedo ver
-- puedeActualizar
-- puede crear
-- canDelete
-- puedePurgar
+- [puedo ver](https://forge.glpi-project.org/apidoc/class-CommonDBTM.html#_canView)
+- [puede Actualizar](https://forge.glpi-project.org/apidoc/class-CommonDBTM.html#_canUpdate)
+- [puede crear](https://forge.glpi-project.org/apidoc/class-CommonDBTM.html#_canCreate)
+- [canDelete](https://forge.glpi-project.org/apidoc/class-CommonDBTM.html#_canDelete)
+- [puedePurgar](https://forge.glpi-project.org/apidoc/class-CommonDBTM.html#_canPurge)
 
 Si necesita contrastar un derecho específico `rightname` con un posible derecho, así es como se hace:
 
@@ -104,15 +104,15 @@ if (Session::haveRight('ticket', CREATE)) {
 }
 ```
 Ver definición de métodos:
-- tiene derecho
-- tenerDerechosY
-- tenerDerechosO
+- [tiene derecho](https://forge.glpi-project.org/apidoc/class-Session.html#_haveRight)
+- [tener Derechos AND](https://forge.glpi-project.org/apidoc/class-Session.html#_haveRightsAnd)
+- [tener Derechos OR](https://forge.glpi-project.org/apidoc/class-Session.html#_haveRightsOr)
 
 Todas las funciones anteriores devuelven un valor booleano. Si queremos un troquel elegante de sus páginas, tenemos una función equivalente pero con un `check` prefijo en su lugar `have`:
 
-- comprobarDerecho
-- comprobarDerechosY
-- comprobarDerechosO
+- [comprobar Derecho](https://forge.glpi-project.org/apidoc/class-Session.html#_checkRight)
+- [comprobar Derechos AND](https://forge.glpi-project.org/apidoc/class-Session.html#_checkRightsAnd)
+- [comprobar Derechos OR](https://forge.glpi-project.org/apidoc/class-Session.html#_checkRightsOr)
 
 Si necesita marcar un derecho directamente en una consulta SQL, utilice bit a bit `&` y `|` operadores, ex para usuarios:
 
@@ -128,7 +128,7 @@ $query = "SELECT `glpi_profiles_users`.`users_id`
       AND `glpi_profilerights`.`rights` & ". (READ | CREATE);
 $result = $DB->query($query);
 ```
-En este fragmento, realiza una operación bit a bit para obtener la suma de estos derechos y el operador SQL realiza una comparación lógica con el valor actual en la base de datos. `READ | CREATE &`
+En este fragmento, realiza una [operación bit](http://php.net/manual/fr/language.operators.bitwise.php) a bit para obtener la suma de estos derechos y el [operador SQL realiza](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html) una comparación lógica con el valor actual en la base de datos. `READ | CREATE &`
 
 ## Especificidades de CommonDBRelation y CommonDBChild
 
