@@ -1,6 +1,7 @@
 # GLPI
 ## _Metas_
 Proporcione una forma para que el administrador segmente los usos en perfiles de usuarios.
+
 ## Perfiles
 
 La clase Perfil (correspondiente a la `glpi_profilestabla`) almacena cada conjunto de derechos.
